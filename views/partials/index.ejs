@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <h1>My Reading List</h1>
+  <p>Books I have read, with notes and ratings</p>
+</section>
+
+<!-- Sorting options -->
+<section class="sort-bar">
+  <span>Sort by:</span>
+  <a href="/?sort=recency" class="<%= sort === 'recency' ? 'active' : '' %>">Recent</a>
+  <a href="/?sort=rating" class="<%= sort === 'rating' ? 'active' : '' %>">Rating</a>
+  <a href="/?sort=title" class="<%= sort === 'title' ? 'active' : '' %>">Title</a>
+</section>
+
+<!-- Books grid -->
+<section class="books-grid">
+  <% if (books.length === 0) { %>
+    <p class="no-books">No books yet. <a href="/add">Add your first book!</a></p>
+  <% } else { %>
+    <% books.forEach(book => { %>
+      <div class="book-card">
+        <!-- Book cover from Open Library API -->
+        <% if (book.cover) { %>
+          <img src="<%= book.cover %>" alt="<%= book.title %> cover" class="book-cover" />
+        <% } else { %>
+          <div class="no-cover">No Cover</div>
+        <% } %>
+
+        <div class="book-info">
+          <h2><%= book.title %></h2>
+          <h3>by <%= book.author %></h3>
+          <p class="rating">⭐ <%= book.rating %>/10</p>
+          <p class="date">📅 <%= new Date(book.date_read).toDateString() %></p>
+          <p class="notes"><%= book.notes %></p>
+
+          <!-- Edit and Delete buttons -->
+          <div class="book-actions">
+            <a href="/edit/<%= book.id %>" class="btn-edit">Edit</a>
+            <form action="/delete/<%= book.id %>" method="POST">
+              <button type="submit" class="btn-delete">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

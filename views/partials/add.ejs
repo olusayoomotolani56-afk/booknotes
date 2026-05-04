@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+
+<section class="form-section">
+  <h1>Add a New Book</h1>
+
+  <form action="/add" method="POST">
+    
+    <div class="form-group">
+      <label for="title">Book Title</label>
+      <input type="text" id="title" name="title" placeholder="Enter book title" required />
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input type="text" id="author" name="author" placeholder="Enter author name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="rating">Rating (1-10)</label>
+      <input type="number" id="rating" name="rating" min="1" max="10" placeholder="Rate the book" required />
+    </div>
+
+    <div class="form-group">
+      <label for="date_read">Date Read</label>
+      <input type="date" id="date_read" name="date_read" required />
+    </div>
+
+    <div class="form-group">
+      <label for="isbn">ISBN</label>
+      <input type="text" id="isbn" name="isbn" placeholder="Enter ISBN for book cover" />
+      <small>Used to fetch the book cover. You can find it on Google or the back of the book.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes / Summary</label>
+      <textarea id="notes" name="notes" rows="6" placeholder="Write your notes or summary here..."></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-submit">Add Book</button>
+      <a href="/" class="btn-cancel">Cancel</a>
+    </div>
+
+  </form>
+</section>
+
+<%- include('partials/footer') %>
